@@ -1,0 +1,18 @@
+defaults:
+    - _self_
+    - logger: tensorboard
+
+_target_: lightning.pytorch.Trainer
+logger: ${trainer.logger}
+callbacks:
+    - _target_: lightning.pytorch.callbacks.LearningRateMonitor
+    - _target_: lightning.pytorch.callbacks.ModelCheckpoint
+      save_top_k: 1
+      dirpath: ${model_cache_path}/checkpoints
+      monitor: val_loss
+    - _target_: lightning.pytorch.callbacks.ModelSummary
+      max_depth: 2
+val_check_interval: 0.2
+max_epochs: 1
+accelerator: gpu
+devices: 1

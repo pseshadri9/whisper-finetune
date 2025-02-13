@@ -1,0 +1,10 @@
+_target_: data_utils.base.datamodule.AudioDataModule
+batch_size: 36
+num_workers: 6
+
+metadata: ${data.preprocess.metadata}
+
+sample_rate: ${data.preprocess.sample_rate}
+segment_length: 10.0
+frames_per_second: 100
+random_seed: ${seed}

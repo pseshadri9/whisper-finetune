@@ -1,0 +1,9 @@
+_target_: torchaudio.transforms.MelSpectrogram
+n_fft: 2048
+win_length: 2048
+hop_length: 160 #${data.preprocess.sample_rate} // ${data.datamodule.frames_per_second}  # calculated as SAMPLE_RATE // FRAMES_PER_SECOND
+n_mels: 229
+f_min: 30
+f_max: 8000 #${data.preprocess.sample_rate} // 2  # calculated as SAMPLE_RATE // 2
+center: true
+pad_mode: reflect

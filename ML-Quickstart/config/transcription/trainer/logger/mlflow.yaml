@@ -1,0 +1,6 @@
+_target_: lightning.pytorch.loggers.MLFlowLogger
+save_dir: ${hydra:runtime.output_dir}
+experiment_name: TDA
+name: TDA
+log_model: True
+tracking_uri: ${oc.env:MLFLOW_TRACKING_URI, http://localhost:5000}

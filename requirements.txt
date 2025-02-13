@@ -1,0 +1,11 @@
+hydra-core
+lightning
+mido
+numpy
+omegaconf
+sox
+toml
+torch
+torchaudio
+torchmetrics
+tqdm

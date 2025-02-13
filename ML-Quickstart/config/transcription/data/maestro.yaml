@@ -1,0 +1,11 @@
+defaults:
+    - _self_
+    - preprocess: maestro
+    - feature_extraction: default
+    - datamodule: default
+
+datamodule:
+    batch_size: 36
+    num_workers: 12
+
+dataset_name: "maestro"

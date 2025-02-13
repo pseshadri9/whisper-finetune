@@ -1,0 +1,5 @@
+defaults:
+  - default
+
+model_type: Regress_pedal_CRNN
+loss: regress_pedal_bce

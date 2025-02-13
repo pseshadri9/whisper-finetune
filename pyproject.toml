@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ML-Quickstart"
+description = "A general purpose template for (audio) ML Research"
+authors = []
+readme = "README.md"
+version = "0.0.1"
+license = { text = "me" }
+requires-python = ">=3.11"
+dependencies = [
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff",
+    "pre-commit",
+]
+test = [
+    "pytest"
+]
+
+[tool.setuptools.packages]
+find = { }  # Scan the project directory with the default parameters
+
+[tool.ruff]
+target-version = "py311"
+line-length = 120
+indent-width = 4
+
+[tool.ruff.lint]
+
+extend-select = [
+    "I",   # sort imports
+    "FA",  # __future__ annotations
+    "UP",  # pyupgrade
+    "E",
+    "W",
+    "PL",  # pylint
+]
+
+extend-ignore = ['PLR0913', 'PLR2004']
+
+[tool.ruff.lint.isort.sections]
+"ML-Quickstart" = ["ML-Quickstart"]
+
+[tool.ruff.lint.isort]
+section-order = ["future", "standard-library", "third-party", "first-party", "tda", "local-folder"]

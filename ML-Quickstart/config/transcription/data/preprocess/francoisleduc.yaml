@@ -1,0 +1,6 @@
+defaults:
+    - default
+
+source_path: data/raw/FrancoisLeducDatasetPublication/
+audio_ext: .mp3
+label_ext: .mid

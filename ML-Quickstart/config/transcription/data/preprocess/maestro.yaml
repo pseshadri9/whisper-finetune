@@ -1,0 +1,5 @@
+defaults:
+  - default
+
+source_path: data/raw/maestro-v3.0.0/
+metadata: /data/raw/maestro-v3.0.0/maestro-v3.0.0.json

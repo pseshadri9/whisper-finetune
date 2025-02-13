@@ -1,0 +1,29 @@
+base:
+    _target_: models.TranscriptionModel
+    feature_extractor: ${data.feature_extraction}
+    model_type: Null
+    mel_bins: ${data.feature_extraction.n_mels}
+    loss: Null
+    midfeat: 1792
+    momentum: 0.01
+    learning_rate: 0.0005
+
+onset_offset:
+    _target_: ${model.base._target_}
+    feature_extractor: ${model.base.feature_extractor}
+    model_type: RegressOnsetOffsetFrameVelocityCRNN
+    mel_bins: ${model.base.mel_bins}
+    loss: RegressOnsetOffsetFrameVelocityLoss
+    midfeat: ${model.base.midfeat}
+    momentum: ${model.base.momentum}
+    learning_rate: ${model.base.learning_rate}
+
+pedal:
+    _target_: ${model.base._target_}
+    feature_extractor: ${model.base.feature_extractor}
+    model_type: RegressPedalCRNN
+    mel_bins: ${model.base.mel_bins}
+    loss: RegressPedalLoss
+    midfeat: ${model.base.midfeat}
+    momentum: ${model.base.momentum}
+    learning_rate: ${model.base.learning_rate}

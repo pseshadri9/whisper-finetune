@@ -1,0 +1,6 @@
+_target_: base.models.LightningModel
+feature_extractor: ${data.feature_extraction}
+model_type: Null 
+mel_bins: ${data.feature_extraction.n_mels}
+loss: Null 
+learning_rate: 0.005
