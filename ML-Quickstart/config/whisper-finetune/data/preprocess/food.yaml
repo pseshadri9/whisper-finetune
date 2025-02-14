@@ -1,0 +1,7 @@
+defaults:
+    - default
+
+source_path: /home/ubuntu/whisper-finetune/ML-Quickstart/data/raw/labeled-audio-segments/
+destination_path: /home/ubuntu/whisper-finetune/ML-Quickstart/data/raw/labeled-audio-segments/
+audio_ext: .pcm
+label_ext: .txt

@@ -1,0 +1,10 @@
+_target_ : data_utils.preprocess
+source_path: Null #path to directory containing all audio, label files
+destination_path: data/preprocessed/
+metadata: Null #path to metadata file if predefined, else will be generated on first run
+
+audio_ext: .wav
+label_ext: Null
+processed_ext: .npy
+
+sample_rate: 16000

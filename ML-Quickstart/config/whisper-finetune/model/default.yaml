@@ -1,0 +1,2 @@
+_target_: models.model_blocks.WhisperModelPipeline
+model_type: "openai/whisper-tiny.en"

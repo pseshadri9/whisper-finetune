@@ -1,0 +1,75 @@
+seed: 1234
+ckpt: null
+experiment_name: base/train
+work_dir: ${hydra:runtime.cwd}
+log_dir: ${work_dir}/logs
+data:
+  dataset: Default
+  preprocess:
+    _target_: data_utils.preprocess
+    source_path: /home/ubuntu/whisper-finetune/ML-Quickstart/data/raw/labeled-audio-segments/
+    destination_path: /home/ubuntu/whisper-finetune/ML-Quickstart/data/raw/labeled-audio-segments/
+    metadata: null
+    audio_ext: .pcm
+    label_ext: .txt
+    processed_ext: .npy
+    sample_rate: 16000
+  feature_extraction:
+    _target_: torchaudio.transforms.MelSpectrogram
+    n_fft: 2048
+    win_length: 2048
+    hop_length: 160
+    n_mels: 229
+    f_min: 30
+    f_max: 8000
+    center: true
+    pad_mode: reflect
+  datamodule:
+    _target_: data_utils.datamodule.AudioDataModule
+    batch_size: 4
+    num_workers: 6
+    metadata: ${data.preprocess.metadata}
+    sample_rate: ${data.preprocess.sample_rate}
+    segment_length: 10.0
+    frames_per_second: 100
+    random_seed: ${seed}
+model:
+  _target_: models.model_blocks.WhisperModelPipeline
+  model_type: openai/whisper-tiny.en
+trainer:
+  logger:
+    _target_: lightning.pytorch.loggers.TensorBoardLogger
+    save_dir: ${hydra:runtime.output_dir}
+    name: logs
+  training_args:
+    _target_: transformers.Seq2SeqTrainingArguments
+    output_dir: ${hydra:runtime.output_dir}
+    per_device_train_batch_size: 72
+    per_device_eval_batch_size: 72
+    dataloader_num_workers: 4
+    gradient_accumulation_steps: 1
+    learning_rate: 1.0e-05
+    warmup_steps: 500
+    max_steps: 5000
+    gradient_checkpointing: true
+    fp16: true
+    evaluation_strategy: steps
+    predict_with_generate: true
+    generation_max_length: 225
+    save_steps: 1000
+    eval_steps: 1000
+    logging_steps: 25
+    report_to: tensorboard
+    load_best_model_at_end: true
+    metric_for_best_model: wer
+    greater_is_better: false
+    push_to_hub: false
+  trainer:
+    _target_: transformers.Seq2SeqTrainer
+    training_args: training_args
+    model: model.model
+    train_dataset: datamodule.train_dataset
+    eval_dataset: datamodule.test_dataset
+    data_collator: data_utils.WhisperCollate
+    compute_metrics: model.metrics.compute_metrics
+    tokenizer: model.processor.feature_extractor

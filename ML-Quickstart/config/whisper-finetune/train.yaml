@@ -1,0 +1,12 @@
+defaults:
+    - _self_
+    - data: default
+    - model: default
+    - trainer: default
+
+seed: 1234
+ckpt: Null #list previous training checkpoint here, else Null
+
+experiment_name: base/train
+work_dir: ${hydra:runtime.cwd}
+log_dir: ${work_dir}/logs

@@ -9,3 +9,6 @@ torch
 torchaudio
 torchmetrics
 tqdm
+transformers
+git+https://github.com/openai/whisper.git
+evaluate

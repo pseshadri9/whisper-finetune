@@ -1,0 +1,13 @@
+defaults:
+    - logger: default
+    - training_args: whisper
+
+trainer:
+  _target_: transformers.Seq2SeqTrainer
+  training_args: training_args
+  model: model.model
+  train_dataset: datamodule.train_dataset
+  eval_dataset: datamodule.test_dataset
+  data_collator: data_utils.WhisperCollate
+  compute_metrics: model.metrics.compute_metrics
+  tokenizer: model.processor.feature_extractor
