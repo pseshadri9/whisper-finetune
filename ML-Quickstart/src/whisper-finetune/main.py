@@ -25,6 +25,7 @@ def main(config: DictConfig):
 
     torch.cuda.empty_cache()
     torch.set_float32_matmul_precision("high")
+    #torch.set_num_threads(4)
 
     log.info(
         f"Pre-processing files from <{config.data.preprocess.source_path}> to \
@@ -64,7 +65,7 @@ def main(config: DictConfig):
 
     
     #train_and_evaluate(model, trainer, data, ckpt_path=config.ckpt)
-    trainer.evaluate()
+    print(trainer.evaluate())
     trainer.train()
 
 def hf_dataset(train_dataset, test_dataset, feature_extractor, tokenizer):

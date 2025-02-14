@@ -1,5 +1,5 @@
 import evaluate
-evaluate.load("wer")
+metric = evaluate.load("wer")
 
 def compute_metrics(tokenizer):
     def _compute_metrics(pred):
